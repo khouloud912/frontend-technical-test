@@ -1,0 +1,116 @@
+// Design tokens.
+//
+// Colors are emitted as CSS custom properties on :root (see globals.scss) so a theme
+// (e.g. dark mode) can override them at runtime. Components must use the `$color-*`
+// aliases below, never raw hex values.
+//
+// Every text/background pair is checked against WCAG AA (ratios measured, on white
+// unless noted). #ff6e14 is only 2.8:1 on white: accents and large shapes only,
+// never small text, never behind white text.
+
+$theme-light: (
+  'brand': #ff6e14,
+  'brand-strong': #c24400,
+  // 5.10:1 — orange text, primary buttons (white text)
+  'text': #1a1a1a,
+  // 17.4:1 (16.1:1 on surface)
+  'text-muted': #5c5c5c,
+  // 6.69:1 (6.17:1 on surface)
+  'text-inverse': #ffffff,
+  'bg': #ffffff,
+  'surface': #f4f6f7,
+  'surface-hover': #eceff1,
+  'border': #e1e4e8,
+  'bubble-mine': #c24400,
+  // white text 5.10:1
+  'bubble-mine-text': #ffffff,
+  'bubble-theirs': #f4f6f7,
+  'bubble-theirs-text': #1a1a1a,
+  'danger': #c62828,
+  // 5.62:1
+  'success': #2e7d32,
+  // 5.13:1
+  // Focus ring: #ff6e14 fails the 3:1 non-text contrast (WCAG 1.4.11) on white,
+  // so the ring uses the strong orange (5.10:1).
+  'focus': #c24400,
+  'overlay': rgb(26 26 26 / 50%),
+);
+
+// Avatar backgrounds, picked deterministically from the user id. White initial on
+// each passes 4.5:1 (lowest: #2e7d32, 5.13:1).
+$avatar-colors: (#b43c00, #1565c0, #2e7d32, #6a1b9a, #ad1457, #00695c, #4e342e, #283593);
+
+// Aliases used by components
+$color-brand: var(--color-brand);
+$color-brand-strong: var(--color-brand-strong);
+$color-text: var(--color-text);
+$color-text-muted: var(--color-text-muted);
+$color-text-inverse: var(--color-text-inverse);
+$color-bg: var(--color-bg);
+$color-surface: var(--color-surface);
+$color-surface-hover: var(--color-surface-hover);
+$color-border: var(--color-border);
+$color-bubble-mine: var(--color-bubble-mine);
+$color-bubble-mine-text: var(--color-bubble-mine-text);
+$color-bubble-theirs: var(--color-bubble-theirs);
+$color-bubble-theirs-text: var(--color-bubble-theirs-text);
+$color-danger: var(--color-danger);
+$color-success: var(--color-success);
+$color-focus: var(--color-focus);
+$color-overlay: var(--color-overlay);
+
+// Spacing (4px scale)
+$space-1: 0.25rem;
+$space-2: 0.5rem;
+$space-3: 0.75rem;
+$space-4: 1rem;
+$space-5: 1.5rem;
+$space-6: 2rem;
+$space-7: 3rem;
+
+// Typography (system font stack: no web font download)
+$font-family:
+  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans',
+  'Droid Sans', 'Helvetica Neue', sans-serif;
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-md: 1rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.375rem;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+$line-height-tight: 1.25;
+$line-height-base: 1.5;
+
+// Radii
+$radius-sm: 6px;
+$radius-md: 12px;
+$radius-lg: 18px;
+$radius-full: 9999px;
+
+// Elevation
+$shadow-sm: 0 1px 2px rgb(0 0 0 / 6%);
+$shadow-md: 0 4px 16px rgb(0 0 0 / 10%);
+$shadow-lg: 0 12px 40px rgb(0 0 0 / 18%);
+
+// Breakpoints (mobile-first: min-width)
+$breakpoint-sm: 480px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+// Layout
+$header-height: 64px;
+$sidebar-width: 360px;
+$touch-target: 44px; // WCAG 2.5.5 / Apple HIG minimum
+
+// Motion
+$duration-fast: 120ms;
+$duration-base: 200ms;
+$easing-standard: cubic-bezier(0.2, 0, 0, 1);
+
+// Stacking
+$z-header: 10;
+$z-banner: 20;
+$z-modal: 100;

@@ -22,7 +22,7 @@ Obvisouly, it is up to you to make something nice and pretty, you are free to de
 
 <details>
   <summary>Click to see the sketches</summary>
-  
+
 Mobile list :
 
 ![](./sketches/list-mobile.jpg)
