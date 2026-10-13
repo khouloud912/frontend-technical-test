@@ -1,0 +1,89 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// Mobile first: a single pane is visible, the list by default
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+
+  &__header {
+    z-index: $z-header;
+    display: flex;
+    flex-shrink: 0;
+    gap: $space-3;
+    align-items: center;
+    height: $header-height;
+    padding: 0 $space-4;
+    background-color: $color-bg;
+    // Brand accent: a thin orange line (large shape, no text on it)
+    border-top: 3px solid $color-brand;
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__logo {
+    display: inline-flex;
+    align-items: center;
+    min-height: $touch-target;
+    border-radius: $radius-sm;
+
+    img {
+      width: auto;
+      height: 32px;
+    }
+  }
+
+  &__app-name {
+    padding-left: $space-3;
+    font-weight: $font-weight-medium;
+    color: $color-text-muted;
+    border-left: 1px solid $color-border;
+  }
+
+  &__body {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+  }
+
+  &__sidebar {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    background-color: $color-bg;
+  }
+
+  &__main {
+    display: none;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    background-color: $color-bg;
+  }
+
+  &--thread-open &__sidebar {
+    display: none;
+  }
+
+  &--thread-open &__main {
+    display: flex;
+  }
+
+  // Desktop: both panes side by side
+  @include from(md) {
+    &__sidebar,
+    &--thread-open &__sidebar {
+      display: flex;
+      flex: 0 0 $sidebar-width;
+      border-right: 1px solid $color-border;
+    }
+
+    &__main {
+      @include dotted-canvas;
+
+      display: flex;
+    }
+  }
+}

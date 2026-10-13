@@ -1,0 +1,58 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.item {
+  @include transition(background-color);
+
+  position: relative;
+  display: flex;
+  gap: $space-3;
+  align-items: center;
+  min-height: 68px;
+  padding: $space-3;
+  border-radius: $radius-md;
+
+  &:hover {
+    background-color: $color-surface;
+  }
+
+  &:focus-visible {
+    outline-offset: -2px;
+  }
+
+  &__name {
+    @include truncate;
+
+    flex: 1;
+    min-width: 0;
+    font-weight: $font-weight-medium;
+    color: $color-text;
+  }
+
+  &__date {
+    flex-shrink: 0;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+  }
+
+  // Active conversation: soft orange tint + orange indicator bar
+  &--active,
+  &--active:hover {
+    background-color: $color-brand-soft;
+  }
+
+  &--active::before {
+    position: absolute;
+    top: $space-3;
+    bottom: $space-3;
+    left: 0;
+    width: 4px;
+    content: '';
+    background-color: $color-brand;
+    border-radius: 0 $radius-full $radius-full 0;
+  }
+
+  &--active &__name {
+    font-weight: $font-weight-bold;
+  }
+}

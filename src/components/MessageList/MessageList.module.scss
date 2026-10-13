@@ -1,0 +1,25 @@
+@use '../../styles/variables' as *;
+
+.message-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0 $space-4 $space-5;
+  margin: 0;
+  list-style: none;
+
+  // Day separator: a small centered chip
+  &__separator {
+    align-self: center;
+    padding: $space-1 $space-3;
+    margin: $space-5 0 $space-1;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $color-text-muted;
+    background-color: $color-chip;
+    border-radius: $radius-full;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+}

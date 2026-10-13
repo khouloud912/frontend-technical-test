@@ -1,0 +1,77 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.conversation-page {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+
+  &__header {
+    display: flex;
+    flex-shrink: 0;
+    gap: $space-3;
+    align-items: center;
+    min-height: 72px;
+    padding: $space-3 $space-4;
+    background-color: $color-bg;
+    border-bottom: 1px solid $color-border;
+    box-shadow: $shadow-sm;
+  }
+
+  // Back to the list: mobile only (the list is always visible on desktop)
+  &__back {
+    @include touch-target;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -$space-2;
+    color: $color-text;
+    border-radius: $radius-full;
+
+    &:hover {
+      background-color: $color-surface-hover;
+    }
+
+    @include from(md) {
+      display: none;
+    }
+  }
+
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  &__title {
+    @include truncate;
+
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-tight;
+  }
+
+  &__subtitle {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+  }
+
+  &__messages {
+    @include dotted-canvas;
+
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  &__link {
+    font-weight: $font-weight-medium;
+    color: $color-brand-strong;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}

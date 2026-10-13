@@ -60,6 +60,15 @@ export function formatShortDate(seconds: number, now: Date = new Date()): string
     : shortDateWithYearFormatter.format(date)
 }
 
+/** Inline sentence ending: "aujourd'hui à 14:05", "hier à 14:05" or "le lundi 5 juillet 2021 à 14:05". */
+export function formatRelativeDateTime(seconds: number, now: Date = new Date()): string {
+  if (!isValidTimestamp(seconds)) return ''
+  const days = daysBetween(fromUnixSeconds(seconds), now)
+  const day = formatDayLabel(seconds, now)
+  const prefix = days === 0 || days === 1 ? day.toLowerCase() : `le ${day}`
+  return `${prefix} à ${formatTime(seconds)}`
+}
+
 /** Full readable date for screen readers and tooltips: "mercredi 7 juillet 2021 à 05:44". */
 export function formatFullDate(seconds: number): string {
   if (!isValidTimestamp(seconds)) return ''

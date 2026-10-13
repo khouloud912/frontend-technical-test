@@ -1,0 +1,64 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.message {
+  display: flex;
+  flex-direction: column;
+  max-width: min(80%, 32rem);
+  margin-top: $space-1;
+
+  &--first {
+    margin-top: $space-4;
+  }
+
+  &--mine {
+    align-self: flex-end;
+    align-items: flex-end;
+  }
+
+  &--theirs {
+    align-self: flex-start;
+    align-items: flex-start;
+  }
+
+  &__author {
+    padding: 0 $space-3 $space-1;
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+  }
+
+  &__bubble {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 $space-2;
+    align-items: flex-end;
+    padding: $space-2 $space-3;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-sm;
+  }
+
+  &--mine &__bubble {
+    color: $color-bubble-mine-text;
+    background-color: $color-bubble-mine;
+    border-bottom-right-radius: $radius-sm;
+  }
+
+  &--theirs &__bubble {
+    color: $color-bubble-theirs-text;
+    background-color: $color-bubble-theirs;
+    border: 1px solid $color-border;
+    border-bottom-left-radius: $radius-sm;
+  }
+
+  &__body {
+    // Keep line breaks typed by the user, break very long words/URLs
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  &__time {
+    margin-left: auto;
+    font-size: $font-size-xs;
+    opacity: 0.85;
+  }
+}

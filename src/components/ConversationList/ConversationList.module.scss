@@ -1,0 +1,40 @@
+@use '../../styles/variables' as *;
+
+.conversation-list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+
+  &__title {
+    display: flex;
+    gap: $space-2;
+    align-items: center;
+    padding: $space-5 $space-4 $space-3;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-tight;
+  }
+
+  &__count {
+    min-width: 1.75rem;
+    padding: 0.125rem $space-2;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    color: $color-brand-strong;
+    text-align: center;
+    background-color: $color-brand-soft;
+    border-radius: $radius-full;
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+    gap: $space-1;
+    padding: 0 $space-2 $space-4;
+    margin: 0;
+    overflow-y: auto;
+    list-style: none;
+    overscroll-behavior: contain;
+  }
+}

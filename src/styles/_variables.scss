@@ -9,31 +9,42 @@
 // never small text, never behind white text.
 
 $theme-light: (
+  // Brand
   'brand': #ff6e14,
+  // Orange text, primary buttons with white text: 5.10:1
   'brand-strong': #c24400,
-  // 5.10:1 — orange text, primary buttons (white text)
+  // Hover of brand-strong, white text 6.38:1
+  'brand-strong-hover': #a83b00,
+  // Tint behind text (active item): text 15.75:1, muted 6.05:1
+  'brand-soft': #fff1e8,
+  // Text: 17.4:1 on white
   'text': #1a1a1a,
-  // 17.4:1 (16.1:1 on surface)
+  // Secondary text: 6.69:1 on white, 6.17:1 on surface
   'text-muted': #5c5c5c,
-  // 6.69:1 (6.17:1 on surface)
   'text-inverse': #ffffff,
+  // Backgrounds
   'bg': #ffffff,
   'surface': #f4f6f7,
   'surface-hover': #eceff1,
+  // Thread background: muted text 6.27:1
+  'canvas': #faf7f5,
+  // Decorative dot pattern only (no text on it)
+  'canvas-dot': #e6ddd6,
+  // Day separator chips: muted text 5.60:1
+  'chip': #efeae6,
   'border': #e1e4e8,
+  // Bubbles: mine white on strong orange 5.10:1, theirs text on white 17.4:1
   'bubble-mine': #c24400,
-  // white text 5.10:1
   'bubble-mine-text': #ffffff,
-  'bubble-theirs': #f4f6f7,
+  'bubble-theirs': #ffffff,
   'bubble-theirs-text': #1a1a1a,
+  // States: 5.62:1 and 5.13:1 on white
   'danger': #c62828,
-  // 5.62:1
   'success': #2e7d32,
-  // 5.13:1
   // Focus ring: #ff6e14 fails the 3:1 non-text contrast (WCAG 1.4.11) on white,
-  // so the ring uses the strong orange (5.10:1).
+  // so the ring uses the strong orange (5.10:1)
   'focus': #c24400,
-  'overlay': rgb(26 26 26 / 50%),
+  'overlay': rgb(26 26 26 / 50%)
 );
 
 // Avatar backgrounds, picked deterministically from the user id. White initial on
@@ -43,6 +54,11 @@ $avatar-colors: (#b43c00, #1565c0, #2e7d32, #6a1b9a, #ad1457, #00695c, #4e342e, 
 // Aliases used by components
 $color-brand: var(--color-brand);
 $color-brand-strong: var(--color-brand-strong);
+$color-brand-strong-hover: var(--color-brand-strong-hover);
+$color-brand-soft: var(--color-brand-soft);
+$color-canvas: var(--color-canvas);
+$color-canvas-dot: var(--color-canvas-dot);
+$color-chip: var(--color-chip);
 $color-text: var(--color-text);
 $color-text-muted: var(--color-text-muted);
 $color-text-inverse: var(--color-text-inverse);
