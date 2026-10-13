@@ -1,23 +1,47 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect, useRef } from 'react'
 import { MessageBubble } from '@/components/MessageBubble/MessageBubble'
 import { MESSAGES } from '@/constants/messages'
-import type { Message } from '@/types/message'
+import type { ThreadMessage } from '@/types/message'
 import { formatDayLabel, fromUnixSeconds, toISODate } from '@/utils/formatDate'
 import styles from './MessageList.module.scss'
 
 interface MessageListProps {
   /** Oldest first. */
-  messages: Message[]
+  messages: ThreadMessage[]
   loggedUserId: number
   participantName: string
+  onRetry?: (message: ThreadMessage) => void
 }
 
 const dayKey = (seconds: number) => fromUnixSeconds(seconds).toDateString()
 
+const prefersReducedMotion = () =>
+  typeof window.matchMedia === 'function' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
 /** Messages grouped by day (separators) and by consecutive author. */
-export function MessageList({ messages, loggedUserId, participantName }: MessageListProps) {
+export function MessageList({
+  messages,
+  loggedUserId,
+  participantName,
+  onRetry,
+}: MessageListProps) {
+  const listRef = useRef<HTMLOListElement>(null)
+  const hasScrolledRef = useRef(false)
+  const lastMessageId = messages[messages.length - 1]?.id
+
+  // Keep the newest message in view: instantly on open, smoothly when one arrives
+  useEffect(() => {
+    const smooth = hasScrolledRef.current && !prefersReducedMotion()
+    listRef.current?.lastElementChild?.scrollIntoView?.({
+      block: 'end',
+      behavior: smooth ? 'smooth' : 'auto',
+    })
+    hasScrolledRef.current = true
+  }, [lastMessageId])
+
   return (
-    <ol className={styles['message-list']}>
+    <ol ref={listRef} className={styles['message-list']}>
       {messages.map((message, index) => {
         const previous = messages[index - 1]
         const isNewDay = !previous || dayKey(previous.timestamp) !== dayKey(message.timestamp)
@@ -37,6 +61,7 @@ export function MessageList({ messages, loggedUserId, participantName }: Message
               isMine={isMine}
               authorName={isMine ? MESSAGES.thread.you : participantName}
               isFirstInGroup={isNewDay || previous?.authorId !== message.authorId}
+              onRetry={onRetry}
             />
           </Fragment>
         )

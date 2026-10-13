@@ -1,0 +1,105 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.composer {
+  flex-shrink: 0;
+  padding: $space-3 $space-4 $space-2;
+  background-color: $color-bg;
+  border-top: 1px solid $color-border;
+
+  &__field {
+    @include transition(border-color, box-shadow);
+
+    display: flex;
+    gap: $space-2;
+    align-items: flex-end;
+    padding: $space-1 $space-1 $space-1 $space-4;
+    background-color: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-lg;
+
+    // The field shows the focus ring for its textarea
+    &:focus-within {
+      @include focus-ring(1px);
+
+      background-color: $color-bg;
+    }
+  }
+
+  &__input {
+    flex: 1;
+    min-height: $touch-target;
+    // About 6 lines, then the textarea scrolls
+    max-height: 9.5rem;
+    padding: 0.625rem 0;
+    line-height: $line-height-base;
+    resize: none;
+    background: transparent;
+    border: 0;
+    outline: none;
+
+    &::placeholder {
+      color: $color-text-muted;
+    }
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  &__send {
+    @include button-reset;
+    @include touch-target;
+    @include transition(background-color, transform);
+
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    color: $color-text-inverse;
+    background-color: $color-brand-strong;
+    border-radius: $radius-full;
+
+    &:hover:not(:disabled) {
+      background-color: $color-brand-strong-hover;
+    }
+
+    &:active:not(:disabled) {
+      transform: scale(0.94);
+    }
+
+    &:disabled {
+      color: $color-text-muted;
+      cursor: not-allowed;
+      background-color: $color-border;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    gap: $space-3;
+    justify-content: space-between;
+    min-height: 1.25rem;
+    padding: $space-1 $space-2 0;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+  }
+
+  // Keyboard hint: hidden on small screens (still read through aria-describedby)
+  &__hint {
+    display: none;
+
+    @include from(md) {
+      display: inline;
+    }
+  }
+
+  &__counter {
+    margin-left: auto;
+
+    &--limit {
+      font-weight: $font-weight-bold;
+      color: $color-danger;
+    }
+  }
+}

@@ -61,4 +61,34 @@
     font-size: $font-size-xs;
     opacity: 0.85;
   }
+
+  // Not saved yet: shown as a draft with a dashed red border (no opacity: keeps contrast)
+  &--failed &__bubble {
+    color: $color-text;
+    background-color: $color-bg;
+    border: 1px dashed $color-danger;
+  }
+
+  &__status {
+    padding: $space-1 $space-2 0;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+
+    &--failed {
+      font-weight: $font-weight-medium;
+      color: $color-danger;
+    }
+  }
+
+  &__retry {
+    @include button-reset;
+
+    // Inline text button: the hit area is enlarged without moving the layout
+    padding: $space-2 $space-1;
+    margin: (-$space-2) (-$space-1);
+    font-weight: $font-weight-bold;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    border-radius: $radius-sm;
+  }
 }

@@ -33,6 +33,17 @@ export const MESSAGES = {
     notFoundHint: "Cette conversation n'existe pas ou vous n'y avez pas accès.",
     backToList: 'Voir mes conversations',
     you: 'Vous',
+    sending: 'Envoi…',
+    failed: 'Non envoyé',
+    retrySend: "Réessayer l'envoi du message",
+  },
+  composer: {
+    label: 'Votre message',
+    placeholder: 'Écrivez votre message…',
+    send: 'Envoyer le message',
+    hint: 'Entrée pour envoyer, Maj + Entrée pour aller à la ligne',
+    remaining: (count: number) =>
+      `${count} caractère${count > 1 ? 's' : ''} restant${count > 1 ? 's' : ''}`,
   },
   errors: {
     generic: 'Une erreur est survenue. Veuillez réessayer.',

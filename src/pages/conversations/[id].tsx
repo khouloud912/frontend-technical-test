@@ -3,12 +3,14 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Avatar } from '@/components/Avatar/Avatar'
 import { Layout } from '@/components/Layout/Layout'
+import { MessageComposer } from '@/components/MessageComposer/MessageComposer'
 import { MessageList } from '@/components/MessageList/MessageList'
 import { StatusMessage } from '@/components/StatusMessage/StatusMessage'
 import { MESSAGES } from '@/constants/messages'
 import { useLoggedUserId } from '@/context/AuthContext'
 import { useConversations } from '@/hooks/conversations/useConversations'
 import { useMessages } from '@/hooks/messages/useMessages'
+import { useSendMessage } from '@/hooks/messages/useSendMessage'
 import styles from '@/styles/ConversationPage.module.scss'
 import { formatRelativeDateTime, toISODate } from '@/utils/formatDate'
 import { getOtherParticipant } from '@/utils/getOtherParticipant'
@@ -27,6 +29,7 @@ export default function ConversationPage() {
   const conversation = conversations.data?.find(({ id }) => id === conversationId)
   // Only load messages of a conversation the logged user takes part in
   const messages = useMessages(conversationId ?? 0, { enabled: conversation !== undefined })
+  const { send, retry, isPending } = useSendMessage(conversationId ?? 0)
 
   const renderMessages = (participantName: string) => {
     if (messages.isPending) {
@@ -50,6 +53,7 @@ export default function ConversationPage() {
         messages={messages.data}
         loggedUserId={loggedUserId}
         participantName={participantName}
+        onRetry={retry}
       />
     )
   }
@@ -84,10 +88,12 @@ export default function ConversationPage() {
     }
 
     const participant = getOtherParticipant(conversation, loggedUserId)
-    // Posting a message does not update lastMessageTimestamp server-side
+    // Posting a message does not update lastMessageTimestamp server-side.
+    // Messages not saved yet (sending / failed) do not count.
+    const lastSavedMessage = messages.data?.filter((message) => !message.status).pop()
     const lastTimestamp = Math.max(
       conversation.lastMessageTimestamp,
-      messages.data?.[messages.data.length - 1]?.timestamp ?? 0,
+      lastSavedMessage?.timestamp ?? 0,
     )
 
     return (
@@ -116,6 +122,11 @@ export default function ConversationPage() {
         <div className={styles['conversation-page__messages']}>
           {renderMessages(participant.nickname)}
         </div>
+        {/* Only once the thread is loaded, so the optimistic message lands in a ready cache.
+            The key resets the draft when switching conversation. */}
+        {messages.isSuccess && (
+          <MessageComposer key={conversation.id} onSend={send} isPending={isPending} />
+        )}
       </>
     )
   }
