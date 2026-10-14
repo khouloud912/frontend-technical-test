@@ -17,18 +17,19 @@ export function ConversationList({
   headingLevel: Heading = 'h2',
 }: ConversationListProps) {
   const loggedUserId = useLoggedUserId()
-  const { data: conversations, isPending, isError, refetch } = useConversations()
+  const { data: conversations, isPending, error, refetch } = useConversations()
 
   const renderContent = () => {
     if (isPending) {
       return <StatusMessage variant="loading" title={MESSAGES.conversations.loading} />
     }
-    if (isError) {
+    // A failed background refresh keeps the conversations already displayed
+    if (!conversations) {
       return (
         <StatusMessage
           variant="error"
           title={MESSAGES.conversations.error}
-          description={MESSAGES.errors.generic}
+          error={error}
           onRetry={() => void refetch()}
         />
       )

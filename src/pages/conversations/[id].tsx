@@ -35,12 +35,13 @@ export default function ConversationPage() {
     if (messages.isPending) {
       return <StatusMessage variant="loading" title={MESSAGES.thread.loading} />
     }
-    if (messages.isError) {
+    // A failed refresh (polling) keeps the messages already displayed
+    if (!messages.data) {
       return (
         <StatusMessage
           variant="error"
           title={MESSAGES.thread.error}
-          description={MESSAGES.errors.generic}
+          error={messages.error}
           onRetry={() => void messages.refetch()}
         />
       )
@@ -62,12 +63,12 @@ export default function ConversationPage() {
     if (!router.isReady || conversations.isPending) {
       return <StatusMessage variant="loading" title={MESSAGES.thread.loading} />
     }
-    if (conversations.isError) {
+    if (!conversations.data) {
       return (
         <StatusMessage
           variant="error"
           title={MESSAGES.thread.error}
-          description={MESSAGES.errors.generic}
+          error={conversations.error}
           onRetry={() => void conversations.refetch()}
         />
       )
@@ -124,7 +125,7 @@ export default function ConversationPage() {
         </div>
         {/* Only once the thread is loaded, so the optimistic message lands in a ready cache.
             The key resets the draft when switching conversation. */}
-        {messages.isSuccess && (
+        {messages.data && (
           <MessageComposer key={conversation.id} onSend={send} isPending={isPending} />
         )}
       </>

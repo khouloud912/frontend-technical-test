@@ -59,6 +59,11 @@ export const MESSAGES = {
   },
   errors: {
     generic: 'Une erreur est survenue. Veuillez réessayer.',
+    network: 'Connexion impossible. Vérifiez votre réseau.',
+    server: 'Nos serveurs rencontrent un souci. Réessayez dans un instant.',
     retry: 'Réessayer',
+    crash: "Oups, quelque chose s'est mal passé.",
+    crashHint: 'Rechargez la page pour continuer. Vos messages envoyés ne sont pas perdus.',
+    reload: 'Recharger la page',
   },
 } as const

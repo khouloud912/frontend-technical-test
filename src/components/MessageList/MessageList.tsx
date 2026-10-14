@@ -41,7 +41,8 @@ export function MessageList({
   }, [lastMessageId])
 
   return (
-    <ol ref={listRef} className={styles['message-list']}>
+    // Screen readers announce new messages politely (without interrupting)
+    <ol ref={listRef} className={styles['message-list']} role="log" aria-live="polite">
       {messages.map((message, index) => {
         const previous = messages[index - 1]
         const isNewDay = !previous || dayKey(previous.timestamp) !== dayKey(message.timestamp)

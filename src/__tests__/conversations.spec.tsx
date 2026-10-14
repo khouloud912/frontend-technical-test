@@ -84,6 +84,18 @@ describe('conversation list', () => {
     expect(items[0]).toHaveAttribute('href', '/conversations/3')
   })
 
+  it('prefetches the messages of a conversation when its item is hovered', async () => {
+    mockApi({ '/conversations/1': conversations, '/messages/3': [] })
+    renderPage(<Home />)
+
+    await userEvent.hover(await screen.findByRole('link', { name: /Elodie/ }))
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      expect.stringContaining('/messages/3'),
+      expect.anything(),
+    )
+  })
+
   it('shows an empty state when there is no conversation', async () => {
     mockApi({ '/conversations/1': [] })
     renderPage(<Home />)

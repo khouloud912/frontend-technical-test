@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { isApiError } from '@/api/client'
 import { MESSAGES } from '@/constants/messages'
 import styles from './StatusMessage.module.scss'
 
@@ -6,10 +7,22 @@ interface StatusMessageProps {
   title: string
   description?: string
   variant?: 'info' | 'loading' | 'error'
+  /** Turned into a friendly explanation (offline, server down…) when no description is given. */
+  error?: unknown
   /** Displays a "Réessayer" button. */
   onRetry?: () => void
+  /** Label of the retry button (defaults to "Réessayer"). */
+  retryLabel?: string
   /** Extra action, e.g. a link back to the list. */
   action?: ReactNode
+}
+
+/** Tells the user what went wrong in plain words, without technical details. */
+function getErrorMessage(error: unknown): string {
+  const isOffline = typeof navigator !== 'undefined' && !navigator.onLine
+  if (isOffline || (isApiError(error) && error.isNetworkError)) return MESSAGES.errors.network
+  if (isApiError(error) && error.isServerError) return MESSAGES.errors.server
+  return MESSAGES.errors.generic
 }
 
 /** Loading, empty, error and placeholder states share one component. */
@@ -17,9 +30,13 @@ export function StatusMessage({
   title,
   description,
   variant = 'info',
+  error,
   onRetry,
+  retryLabel = MESSAGES.errors.retry,
   action,
 }: StatusMessageProps) {
+  const text = description ?? (error !== undefined ? getErrorMessage(error) : undefined)
+
   return (
     <div
       className={`${styles.status} ${styles[`status--${variant}`]}`}
@@ -45,12 +62,12 @@ export function StatusMessage({
         </span>
       )}
       <p className={styles.status__title}>{title}</p>
-      {description && <p className={styles.status__description}>{description}</p>}
+      {text && <p className={styles.status__description}>{text}</p>}
       {(onRetry || action) && (
         <div className={styles.status__actions}>
           {onRetry && (
             <button type="button" className={styles.status__button} onClick={onRetry}>
-              {MESSAGES.errors.retry}
+              {retryLabel}
             </button>
           )}
           {action}
