@@ -1,4 +1,5 @@
 import { ConversationItem } from '@/components/ConversationItem/ConversationItem'
+import { NewConversationDialog } from '@/components/NewConversationDialog/NewConversationDialog'
 import { StatusMessage } from '@/components/StatusMessage/StatusMessage'
 import { MESSAGES } from '@/constants/messages'
 import { useLoggedUserId } from '@/context/AuthContext'
@@ -65,6 +66,7 @@ export function ConversationList({
           </span>
         )}
       </Heading>
+      <NewConversationDialog />
       {renderContent()}
     </section>
   )

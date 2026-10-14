@@ -1,0 +1,154 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.open-button {
+  @include button-reset;
+  @include touch-target;
+  @include transition(background-color);
+
+  display: inline-flex;
+  gap: $space-2;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - #{$space-4} * 2);
+  margin: 0 $space-4 $space-3;
+  font-weight: $font-weight-medium;
+  color: $color-text-inverse;
+  background-color: $color-brand-strong;
+  border-radius: $radius-full;
+
+  &:hover {
+    background-color: $color-brand-strong-hover;
+  }
+}
+
+.dialog {
+  width: min(28rem, calc(100% - #{$space-6}));
+  max-height: min(36rem, calc(100dvh - #{$space-6}));
+  padding: 0;
+  color: $color-text;
+  background-color: $color-bg;
+  border: 0;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-lg;
+
+  &::backdrop {
+    background-color: $color-overlay;
+  }
+
+  &[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header {
+    display: flex;
+    gap: $space-3;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-4 $space-4 0 $space-5;
+  }
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+  }
+
+  &__close {
+    @include button-reset;
+    @include touch-target;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-text-muted;
+    border-radius: $radius-full;
+
+    &:hover:not(:disabled) {
+      color: $color-text;
+      background-color: $color-surface;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  &__description {
+    padding: 0 $space-5 $space-3;
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+  }
+
+  &__info,
+  &__error {
+    padding: $space-2 $space-3;
+    margin: 0 $space-4 $space-3;
+    font-size: $font-size-sm;
+    border-radius: $radius-sm;
+  }
+
+  &__info {
+    color: $color-text-muted;
+    background-color: $color-surface;
+  }
+
+  &__error {
+    font-weight: $font-weight-medium;
+    color: $color-danger;
+    background-color: $color-brand-soft;
+  }
+
+  &__users {
+    display: flex;
+    flex-direction: column;
+    gap: $space-1;
+    padding: 0 $space-2 $space-3;
+    margin: 0;
+    overflow-y: auto;
+    list-style: none;
+  }
+
+  &__user {
+    @include button-reset;
+    @include transition(background-color);
+
+    display: flex;
+    gap: $space-3;
+    align-items: center;
+    width: 100%;
+    min-height: 56px;
+    padding: $space-2 $space-3;
+    text-align: left;
+    border-radius: $radius-md;
+
+    &:hover:not(:disabled) {
+      background-color: $color-surface;
+    }
+
+    &:focus-visible {
+      outline-offset: -2px;
+    }
+
+    &:disabled {
+      cursor: progress;
+      opacity: 0.6;
+    }
+  }
+
+  &__user-name {
+    @include truncate;
+
+    flex: 1;
+    font-weight: $font-weight-medium;
+  }
+
+  &__user-badge {
+    flex-shrink: 0;
+    padding: 0.125rem $space-2;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    background-color: $color-chip;
+    border-radius: $radius-full;
+  }
+}

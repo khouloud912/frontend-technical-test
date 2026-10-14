@@ -3,6 +3,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider } from '@/context/AuthContext'
 import App from '../pages'
 
+// The home page contains the "Nouvelle conversation" dialog, which navigates
+jest.mock('next/router', () => ({ useRouter: () => ({ query: {}, push: jest.fn() }) }))
+
 global.fetch = jest.fn().mockResolvedValue({ ok: true, status: 200, json: async () => [] })
 
 describe('App', () => {

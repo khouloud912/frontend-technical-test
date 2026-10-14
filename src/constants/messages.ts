@@ -37,6 +37,18 @@ export const MESSAGES = {
     failed: 'Non envoyé',
     retrySend: "Réessayer l'envoi du message",
   },
+  newConversation: {
+    open: 'Nouvelle conversation',
+    title: 'Nouvelle conversation',
+    description: 'Choisissez la personne à qui écrire.',
+    close: 'Fermer',
+    loading: 'Chargement des utilisateurs…',
+    error: 'Impossible de charger la liste des utilisateurs.',
+    empty: 'Aucun autre utilisateur pour le moment.',
+    existing: 'Conversation existante',
+    creating: 'Création de la conversation…',
+    createError: "La conversation n'a pas pu être créée. Veuillez réessayer.",
+  },
   composer: {
     label: 'Votre message',
     placeholder: 'Écrivez votre message…',
