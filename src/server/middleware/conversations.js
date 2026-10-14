@@ -1,10 +1,15 @@
+const fs = require('fs')
 const path = require('path')
-const db = require(`${path.dirname(__filename)}/../db.json`)
+
+const dbPath = path.join(__dirname, '..', 'db.json')
 
 // Need this middleware to catch some requests
 // and return both conversations where userId is sender or recipient
 module.exports = (req, res, next) => {
   if (/conversations/.test(req.url) && req.method === 'GET') {
+    // Read the file on each request (not `require`, which caches it at startup):
+    // conversations created after the server started must be returned too
+    const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'))
     const userId = req.query?.senderId
     const result = db?.conversations?.filter(
       (conv) => conv.senderId == userId || conv.recipientId == userId,
