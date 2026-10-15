@@ -1,9 +1,9 @@
 import { MESSAGES } from '@/constants/messages'
 import type { ThreadMessage } from '@/types/message'
 import { formatFullDate, formatTime, toISODate } from '@/utils/formatDate'
-import styles from './MessageBubble.module.scss'
+import styles from './MessageItem.module.scss'
 
-interface MessageBubbleProps {
+interface MessageItemProps {
   message: ThreadMessage
   isMine: boolean
   authorName: string
@@ -14,13 +14,13 @@ interface MessageBubbleProps {
 }
 
 /** The body is rendered as plain React text: user content is never parsed as HTML. */
-export function MessageBubble({
+export function MessageItem({
   message,
   isMine,
   authorName,
   isFirstInGroup,
   onRetry,
-}: MessageBubbleProps) {
+}: MessageItemProps) {
   const showAuthor = !isMine && isFirstInGroup
 
   return (

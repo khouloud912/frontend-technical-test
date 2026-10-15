@@ -1,4 +1,4 @@
-export type ErrorContext = Record<string, unknown>
+type ErrorContext = Record<string, unknown>
 
 /**
  * Single entry point for error monitoring. Logs to the console outside production;

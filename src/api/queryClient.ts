@@ -4,8 +4,7 @@ import { reportError } from '@/utils/reportError'
 import { isAbortError, isRetryableError } from './client'
 
 /** Exponential backoff: 1s, 2s, 4s… capped. */
-export const retryDelay = (attempt: number): number =>
-  Math.min(1000 * 2 ** attempt, MAX_RETRY_DELAY_MS)
+const retryDelay = (attempt: number): number => Math.min(1000 * 2 ** attempt, MAX_RETRY_DELAY_MS)
 
 export const shouldRetryQuery = (failureCount: number, error: unknown): boolean =>
   failureCount < MAX_QUERY_RETRIES && isRetryableError(error)

@@ -7,7 +7,7 @@ export interface Message {
 }
 
 /** Client-only state of a message that is not saved on the server yet. */
-export type MessageStatus = 'sending' | 'failed'
+type MessageStatus = 'sending' | 'failed'
 
 /**
  * A message as displayed in a thread. Messages typed by the user get a negative

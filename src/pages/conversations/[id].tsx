@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Avatar } from '@/components/Avatar/Avatar'
 import { Layout } from '@/components/Layout/Layout'
-import { MessageComposer } from '@/components/MessageComposer/MessageComposer'
+import { MessageForm } from '@/components/MessageForm/MessageForm'
 import { MessageList } from '@/components/MessageList/MessageList'
 import { StatusMessage } from '@/components/StatusMessage/StatusMessage'
 import { MESSAGES } from '@/constants/messages'
@@ -15,7 +15,6 @@ import styles from '@/styles/ConversationPage.module.scss'
 import { formatRelativeDateTime, toISODate } from '@/utils/formatDate'
 import { getOtherParticipant } from '@/utils/getOtherParticipant'
 
-/** The id comes from the URL: anything but a positive integer is rejected. */
 function parseConversationId(value: string | string[] | undefined): number | null {
   return typeof value === 'string' && /^[1-9]\d{0,9}$/.test(value) ? Number(value) : null
 }
@@ -123,11 +122,7 @@ export default function ConversationPage() {
         <div className={styles['conversation-page__messages']}>
           {renderMessages(participant.nickname)}
         </div>
-        {/* Only once the thread is loaded, so the optimistic message lands in a ready cache.
-            The key resets the draft when switching conversation. */}
-        {messages.data && (
-          <MessageComposer key={conversation.id} onSend={send} isPending={isPending} />
-        )}
+        {messages.data && <MessageForm key={conversation.id} onSend={send} isPending={isPending} />}
       </>
     )
   }

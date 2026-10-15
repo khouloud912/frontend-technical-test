@@ -38,15 +38,12 @@ export const messageSchema = z.object({
 export const messageListSchema = z.array(messageSchema)
 
 /** Unknown keys (such as `token`) are stripped by zod: secrets never reach the UI. */
-export const userSchema = z.object({
+const userSchema = z.object({
   id: idSchema,
   nickname: nicknameSchema,
 }) satisfies z.ZodType<UserSummary>
 
 export const userListSchema = z.array(userSchema)
-
-/** DELETE endpoints answer an empty object: the body is irrelevant. */
-export const emptyResponseSchema = z.unknown()
 
 /** User input: what a message must look like before it is sent. */
 export const messageBodySchema = z

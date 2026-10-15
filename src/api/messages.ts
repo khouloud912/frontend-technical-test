@@ -1,8 +1,8 @@
 import type { Message } from '@/types/message'
 import { ApiError, assertValidId, request } from './client'
-import { emptyResponseSchema, messageBodySchema, messageListSchema, messageSchema } from './schemas'
+import { messageBodySchema, messageListSchema, messageSchema } from './schemas'
 
-export type NewMessagePayload = Omit<Message, 'id'>
+type NewMessagePayload = Omit<Message, 'id'>
 
 export async function getMessages(
   conversationId: number,
@@ -28,9 +28,4 @@ export async function sendMessage(payload: NewMessagePayload): Promise<Message> 
     method: 'POST',
     body: { ...payload, body: body.data },
   })
-}
-
-export async function deleteMessage(messageId: number): Promise<void> {
-  assertValidId(messageId, 'messageId')
-  await request(`/message/${messageId}`, emptyResponseSchema, { method: 'DELETE' })
 }

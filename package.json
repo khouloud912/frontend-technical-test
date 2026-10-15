@@ -29,7 +29,6 @@
     "zod": "^4.6.7"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.13.0",
     "@next/bundle-analyzer": "^15.5.27",
     "@playwright/test": "^1.64.0",
     "@tanstack/react-query-devtools": "^5.104.2",

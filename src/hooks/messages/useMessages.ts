@@ -4,7 +4,7 @@ import { queryKeys } from '@/api/queryKeys'
 import type { ThreadMessage } from '@/types/message'
 
 /** json-server has no push: poll while the thread is displayed (paused when the tab is hidden). */
-export const MESSAGES_POLL_INTERVAL_MS = 5000
+const MESSAGES_POLL_INTERVAL_MS = 5000
 
 const sortChronologically = (messages: ThreadMessage[]): ThreadMessage[] =>
   [...messages].sort((a, b) => a.timestamp - b.timestamp || a.id - b.id)

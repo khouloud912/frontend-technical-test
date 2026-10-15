@@ -1,18 +1,18 @@
 import { useId, useLayoutEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react'
 import { MAX_MESSAGE_LENGTH } from '@/constants/limits'
 import { MESSAGES } from '@/constants/messages'
-import styles from './MessageComposer.module.scss'
+import styles from './MessageForm.module.scss'
 
 /** The remaining-characters counter appears from 80% of the limit. */
 const COUNTER_THRESHOLD = Math.floor(MAX_MESSAGE_LENGTH * 0.8)
 
-interface MessageComposerProps {
+interface MessageFormProps {
   /** Returns false when the message was refused (blank, too long, already sending). */
   onSend: (body: string) => boolean
   isPending: boolean
 }
 
-export function MessageComposer({ onSend, isPending }: MessageComposerProps) {
+export function MessageForm({ onSend, isPending }: MessageFormProps) {
   const [value, setValue] = useState('')
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const inputId = useId()

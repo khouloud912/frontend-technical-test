@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useRef } from 'react'
-import { MessageBubble } from '@/components/MessageBubble/MessageBubble'
+import { MessageItem } from '@/components/MessageItem/MessageItem'
 import { MESSAGES } from '@/constants/messages'
 import type { ThreadMessage } from '@/types/message'
 import { formatDayLabel, fromUnixSeconds, toISODate } from '@/utils/formatDate'
@@ -57,7 +57,7 @@ export function MessageList({
                 </time>
               </li>
             )}
-            <MessageBubble
+            <MessageItem
               message={message}
               isMine={isMine}
               authorName={isMine ? MESSAGES.thread.you : participantName}

@@ -1,9 +1,9 @@
 import type { z } from 'zod'
 import { REQUEST_TIMEOUT_MS } from '@/constants/limits'
 
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3005'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3005'
 
-export type ApiErrorCode =
+type ApiErrorCode =
   /** No response: offline, DNS failure, CORS, server down. */
   | 'NETWORK'
   /** No response within the timeout. */
@@ -53,7 +53,7 @@ export const isAbortError = (error: unknown): boolean =>
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 
-export interface RequestOptions {
+interface RequestOptions {
   method?: HttpMethod
   /** Serialized as JSON. */
   body?: unknown

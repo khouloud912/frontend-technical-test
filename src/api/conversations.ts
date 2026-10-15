@@ -1,8 +1,8 @@
 import type { Conversation } from '@/types/conversation'
 import { ApiError, assertValidId, request } from './client'
-import { conversationListSchema, conversationSchema, emptyResponseSchema } from './schemas'
+import { conversationListSchema, conversationSchema } from './schemas'
 
-export type NewConversationPayload = Omit<Conversation, 'id'>
+type NewConversationPayload = Omit<Conversation, 'id'>
 
 export async function getConversations(
   userId: number,
@@ -26,9 +26,4 @@ export async function createConversation(payload: NewConversationPayload): Promi
     method: 'POST',
     body: payload,
   })
-}
-
-export async function deleteConversation(conversationId: number): Promise<void> {
-  assertValidId(conversationId, 'conversationId')
-  await request(`/conversation/${conversationId}`, emptyResponseSchema, { method: 'DELETE' })
 }

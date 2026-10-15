@@ -69,7 +69,7 @@ export function formatRelativeDateTime(seconds: number, now: Date = new Date()):
   return `${prefix} à ${formatTime(seconds)}`
 }
 
-/** Full readable date for screen readers and tooltips: "mercredi 7 juillet 2021 à 05:44". */
+/** Full readable date :"mercredi 7 juillet 2021 à 05:44". */
 export function formatFullDate(seconds: number): string {
   if (!isValidTimestamp(seconds)) return ''
   return fullDateFormatter.format(fromUnixSeconds(seconds))
