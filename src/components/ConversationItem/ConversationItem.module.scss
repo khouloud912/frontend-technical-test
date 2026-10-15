@@ -35,7 +35,6 @@
     color: $color-text-muted;
   }
 
-  // Active conversation: soft orange tint + orange indicator bar
   &--active,
   &--active:hover {
     background-color: $color-brand-soft;

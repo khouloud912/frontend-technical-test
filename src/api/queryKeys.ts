@@ -1,7 +1,4 @@
-/**
- * Single source of truth for React Query keys. Hierarchical so a whole family can
- * be invalidated at once, e.g. `queryKeys.messages.all`.
- */
+/** Hierarchical so a whole family can be invalidated at once (e.g. messages.all). */
 export const queryKeys = {
   conversations: {
     all: ['conversations'] as const,

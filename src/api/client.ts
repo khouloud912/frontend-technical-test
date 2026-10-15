@@ -6,18 +6,12 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3005'
 type ApiErrorCode =
   /** No response: offline, DNS failure, CORS, server down. */
   | 'NETWORK'
-  /** No response within the timeout. */
   | 'TIMEOUT'
-  /** The server answered with a non-2xx status. */
   | 'HTTP'
   /** The server answered 2xx but the body is not what we expect. */
   | 'INVALID_RESPONSE'
 
-/**
- * Every failure of `request` is an ApiError, so the UI can react to the cause
- * (offline vs server crash vs not found). `status` is the HTTP status, or 0 when
- * no response was received.
- */
+/** `status` is the HTTP status, or 0 when no response was received. */
 export class ApiError extends Error {
   readonly status: number
   readonly code: ApiErrorCode
@@ -55,17 +49,12 @@ type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
 
 interface RequestOptions {
   method?: HttpMethod
-  /** Serialized as JSON. */
   body?: unknown
-  /** Caller cancellation (React Query passes one to every query). */
   signal?: AbortSignal
   timeoutMs?: number
 }
 
-/**
- * Merges the caller's signal with a timeout. Implemented by hand rather than with
- * AbortSignal.any / AbortSignal.timeout, which older Safari versions lack.
- */
+/** Hand-written instead of AbortSignal.any / AbortSignal.timeout, which older Safari lacks. */
 function createSignal(timeoutMs: number, external?: AbortSignal) {
   const controller = new AbortController()
   let timedOut = false
@@ -89,11 +78,7 @@ function createSignal(timeoutMs: number, external?: AbortSignal) {
   }
 }
 
-/**
- * Typed fetch wrapper: timeout, HTTP status check and runtime validation of the
- * response body with a zod schema. Data that does not match the schema is never
- * handed to the UI.
- */
+/** Data that does not match the schema never reaches the UI. */
 export async function request<T>(
   path: string,
   schema: z.ZodType<T>,

@@ -29,7 +29,6 @@
   &__input {
     flex: 1;
     min-height: $touch-target;
-    // About 6 lines, then the textarea scrolls
     max-height: 9.5rem;
     padding: 0.625rem 0;
     line-height: $line-height-base;

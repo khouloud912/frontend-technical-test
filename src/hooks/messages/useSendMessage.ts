@@ -18,11 +18,7 @@ interface SendVariables {
 let lastTempId = 0
 const nextTempId = () => --lastTempId
 
-/**
- * Sends a message with an optimistic update: it appears instantly as "sending",
- * is replaced by the saved message on success, and stays visible as "failed"
- * (with a retry) on error.
- */
+/** Optimistic: shown at once as "sending", kept as "failed" (with retry) on error. */
 export function useSendMessage(conversationId: number) {
   const queryClient = useQueryClient()
   const authorId = useLoggedUserId()

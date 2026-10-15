@@ -9,7 +9,6 @@ interface MessageItemProps {
   authorName: string
   /** First message of a run by the same author: shows the author's name. */
   isFirstInGroup: boolean
-  /** Resends a message that failed. */
   onRetry?: (message: ThreadMessage) => void
 }
 

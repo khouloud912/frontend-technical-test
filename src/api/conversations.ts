@@ -12,10 +12,7 @@ export async function getConversations(
   return request(`/conversations/${userId}`, conversationListSchema, { signal })
 }
 
-/**
- * json-server stores the body as-is, so it must contain every field of a
- * conversation (the swagger only documents `recipientId`).
- */
+/** json-server stores the body as-is: every field is required (the swagger only lists recipientId). */
 export async function createConversation(payload: NewConversationPayload): Promise<Conversation> {
   assertValidId(payload.senderId, 'senderId')
   assertValidId(payload.recipientId, 'recipientId')

@@ -19,7 +19,6 @@ const prefersReducedMotion = () =>
   typeof window.matchMedia === 'function' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-/** Messages grouped by day (separators) and by consecutive author. */
 export function MessageList({
   messages,
   loggedUserId,

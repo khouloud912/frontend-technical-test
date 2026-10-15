@@ -9,7 +9,6 @@
 // never small text, never behind white text.
 
 $theme-light: (
-  // Brand
   'brand': #ff6e14,
   // Orange text, primary buttons with white text: 5.10:1
   'brand-strong': #c24400,
@@ -22,7 +21,6 @@ $theme-light: (
   // Secondary text: 6.69:1 on white, 6.17:1 on surface
   'text-muted': #5c5c5c,
   'text-inverse': #ffffff,
-  // Backgrounds
   'bg': #ffffff,
   'surface': #f4f6f7,
   'surface-hover': #eceff1,
@@ -44,14 +42,13 @@ $theme-light: (
   // Focus ring: #ff6e14 fails the 3:1 non-text contrast (WCAG 1.4.11) on white,
   // so the ring uses the strong orange (5.10:1)
   'focus': #c24400,
-  'overlay': rgb(26 26 26 / 50%)
+  'overlay': rgb(26 26 26 / 50%),
 );
 
 // Avatar backgrounds, picked deterministically from the user id. White initial on
 // each passes 4.5:1 (lowest: #2e7d32, 5.13:1).
 $avatar-colors: (#b43c00, #1565c0, #2e7d32, #6a1b9a, #ad1457, #00695c, #4e342e, #283593);
 
-// Aliases used by components
 $color-brand: var(--color-brand);
 $color-brand-strong: var(--color-brand-strong);
 $color-brand-strong-hover: var(--color-brand-strong-hover);
@@ -99,13 +96,11 @@ $font-weight-bold: 700;
 $line-height-tight: 1.25;
 $line-height-base: 1.5;
 
-// Radii
 $radius-sm: 6px;
 $radius-md: 12px;
 $radius-lg: 18px;
 $radius-full: 9999px;
 
-// Elevation
 $shadow-sm: 0 1px 2px rgb(0 0 0 / 6%);
 $shadow-md: 0 4px 16px rgb(0 0 0 / 10%);
 $shadow-lg: 0 12px 40px rgb(0 0 0 / 18%);
@@ -116,17 +111,14 @@ $breakpoint-md: 768px;
 $breakpoint-lg: 1024px;
 $breakpoint-xl: 1280px;
 
-// Layout
 $header-height: 64px;
 $sidebar-width: 360px;
 $touch-target: 44px; // WCAG 2.5.5 / Apple HIG minimum
 
-// Motion
 $duration-fast: 120ms;
 $duration-base: 200ms;
 $easing-standard: cubic-bezier(0.2, 0, 0, 1);
 
-// Stacking
 $z-header: 10;
 $z-banner: 20;
 $z-modal: 100;

@@ -7,7 +7,7 @@ interface UseUsersOptions {
   enabled?: boolean
 }
 
-/** Every user of the platform. Rarely changes: never considered stale during a session. */
+/** Users rarely change: cached for the whole session. */
 export function useUsers({ enabled = true }: UseUsersOptions = {}) {
   return useQuery({
     queryKey: queryKeys.users.all,

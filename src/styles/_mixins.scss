@@ -61,7 +61,6 @@ $_breakpoints: (
   transition-property: $properties;
 }
 
-// Warm background with a subtle dot grid (thread and empty desktop pane)
 @mixin dotted-canvas {
   background-color: $color-canvas;
   background-image: radial-gradient($color-canvas-dot 1px, transparent 1px);

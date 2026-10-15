@@ -9,10 +9,7 @@ interface AvatarProps {
   size?: 'sm' | 'md'
 }
 
-/**
- * Initial on a color derived from the user id: the same person always gets the
- * same color. Decorative (the name is always displayed next to it).
- */
+/** Same user, same color. Decorative: the name is always shown next to it. */
 export function Avatar({ userId, name, size = 'md' }: AvatarProps) {
   const colorIndex = Math.abs(userId) % AVATAR_COLOR_COUNT
   const initial = name.trim().charAt(0).toUpperCase() || '?'

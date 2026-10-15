@@ -8,10 +8,7 @@ const idSchema = z.number().int().positive()
 
 const nicknameSchema = z.string().trim().min(1)
 
-/**
- * UNIX timestamp in seconds. The swagger documents Message.timestamp as a string
- * while the data holds integers: accept both, always output a number.
- */
+/** UNIX seconds. The swagger says string, the data has integers: accept both. */
 const timestampSchema = z
   .union([z.number(), z.string().regex(/^\d+$/).transform(Number)])
   .pipe(z.number().int().nonnegative())
@@ -45,7 +42,6 @@ const userSchema = z.object({
 
 export const userListSchema = z.array(userSchema)
 
-/** User input: what a message must look like before it is sent. */
 export const messageBodySchema = z
   .string()
   .trim()

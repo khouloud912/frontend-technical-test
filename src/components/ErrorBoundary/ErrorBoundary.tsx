@@ -11,11 +11,7 @@ interface ErrorBoundaryState {
   hasError: boolean
 }
 
-/**
- * Last safety net: if a component crashes while rendering, show a friendly screen
- * instead of a blank page, and report the error.
- * A class component because React has no hook equivalent of componentDidCatch.
- */
+/** A class component: React has no hook equivalent of componentDidCatch. */
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   state: ErrorBoundaryState = { hasError: false }
 

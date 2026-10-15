@@ -3,7 +3,6 @@ import { MAX_MESSAGE_LENGTH } from '@/constants/limits'
 import { MESSAGES } from '@/constants/messages'
 import styles from './MessageForm.module.scss'
 
-/** The remaining-characters counter appears from 80% of the limit. */
 const COUNTER_THRESHOLD = Math.floor(MAX_MESSAGE_LENGTH * 0.8)
 
 interface MessageFormProps {

@@ -17,7 +17,7 @@
     height: $header-height;
     padding: 0 $space-4;
     background-color: $color-bg;
-    // Brand accent: a thin orange line (large shape, no text on it)
+    // Brand orange only as a large shape: too low contrast for text
     border-top: 3px solid $color-brand;
     border-bottom: 1px solid $color-border;
   }
@@ -71,7 +71,6 @@
     display: flex;
   }
 
-  // Desktop: both panes side by side
   @include from(md) {
     &__sidebar,
     &--thread-open &__sidebar {

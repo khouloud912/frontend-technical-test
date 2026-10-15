@@ -11,10 +11,7 @@ import type { UserSummary } from '@/types/user'
 import { getOtherParticipant } from '@/utils/getOtherParticipant'
 import styles from './NewConversationDialog.module.scss'
 
-/**
- * "Nouvelle conversation" button + native <dialog>: showModal() gives a focus trap,
- * Esc to close and an inert background for free.
- */
+/** Native <dialog>: showModal() gives a focus trap, Esc and an inert background for free. */
 export function NewConversationDialog() {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const openButtonRef = useRef<HTMLButtonElement>(null)

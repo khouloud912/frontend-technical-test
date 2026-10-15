@@ -14,11 +14,7 @@ interface UseMessagesOptions {
   enabled?: boolean
 }
 
-/**
- * Messages of a conversation, oldest first.
- * No `placeholderData: keepPreviousData` on purpose: switching conversation must never
- * show the previous conversation's messages, even for a moment.
- */
+/** No keepPreviousData on purpose: never show another conversation's messages, even briefly. */
 export function useMessages(conversationId: number, { enabled = true }: UseMessagesOptions = {}) {
   const queryClient = useQueryClient()
   const queryKey = queryKeys.messages.byConversation(conversationId)

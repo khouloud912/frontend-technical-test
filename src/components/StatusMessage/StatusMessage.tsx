@@ -9,15 +9,11 @@ interface StatusMessageProps {
   variant?: 'info' | 'loading' | 'error'
   /** Turned into a friendly explanation (offline, server down…) when no description is given. */
   error?: unknown
-  /** Displays a "Réessayer" button. */
   onRetry?: () => void
-  /** Label of the retry button (defaults to "Réessayer"). */
   retryLabel?: string
-  /** Extra action, e.g. a link back to the list. */
   action?: ReactNode
 }
 
-/** Tells the user what went wrong in plain words, without technical details. */
 function getErrorMessage(error: unknown): string {
   const isOffline = typeof navigator !== 'undefined' && !navigator.onLine
   if (isOffline || (isApiError(error) && error.isNetworkError)) return MESSAGES.errors.network

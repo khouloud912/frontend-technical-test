@@ -8,10 +8,7 @@ import type { Conversation } from '@/types/conversation'
 const sortByMostRecent = (conversations: Conversation[]): Conversation[] =>
   [...conversations].sort((a, b) => b.lastMessageTimestamp - a.lastMessageTimestamp)
 
-/**
- * json-server does not update lastMessageTimestamp when a message is posted (we
- * update it in the cache instead): a refetch must never move a conversation back in time.
- */
+/** The server never updates lastMessageTimestamp (the cache does): never go back in time. */
 function keepLatestActivity(fresh: Conversation[], previous: Conversation[] = []): Conversation[] {
   const previousById = new Map(previous.map((conversation) => [conversation.id, conversation]))
   return fresh.map((conversation) => ({
@@ -23,7 +20,6 @@ function keepLatestActivity(fresh: Conversation[], previous: Conversation[] = []
   }))
 }
 
-/** Conversations of the logged user, most recent first. */
 export function useConversations() {
   const userId = useLoggedUserId()
   const queryClient = useQueryClient()

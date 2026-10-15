@@ -11,7 +11,6 @@ interface CreateVariables {
   recipient: UserSummary
 }
 
-/** Creates a conversation, adds it to the list and opens it. */
 export function useCreateConversation() {
   const queryClient = useQueryClient()
   const router = useRouter()

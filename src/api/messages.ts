@@ -12,11 +12,7 @@ export async function getMessages(
   return request(`/messages/${conversationId}`, messageListSchema, { signal })
 }
 
-/**
- * The route is rewritten to /messages?conversationId=… and json-server ignores the
- * query string on POST, so `conversationId` must be in the body too.
- * The body is validated here as well as in the UI (defense in depth).
- */
+/** json-server ignores the query string on POST: conversationId must be in the body. */
 export async function sendMessage(payload: NewMessagePayload): Promise<Message> {
   assertValidId(payload.conversationId, 'conversationId')
   assertValidId(payload.authorId, 'authorId')

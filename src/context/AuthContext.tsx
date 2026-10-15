@@ -9,10 +9,7 @@ interface AuthProviderProps {
   userId?: number
 }
 
-/**
- * Authentication is mocked: this provider is the only place to change once a
- * real session (cookie / token) exists.
- */
+/** Auth is mocked: the only place to change once a real session exists. */
 export function AuthProvider({ children, userId = getLoggedUserId() }: AuthProviderProps) {
   return <AuthContext.Provider value={userId}>{children}</AuthContext.Provider>
 }

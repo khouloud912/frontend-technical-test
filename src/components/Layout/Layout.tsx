@@ -12,10 +12,6 @@ interface LayoutProps {
   children: ReactNode
 }
 
-/**
- * Desktop: list on the left, thread on the right.
- * Mobile: one screen at a time (the list on "/", the thread on "/conversations/:id").
- */
 export function Layout({ activeConversationId, children }: LayoutProps) {
   const isThreadOpen = activeConversationId !== undefined
 

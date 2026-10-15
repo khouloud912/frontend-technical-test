@@ -1,7 +1,4 @@
-/**
- * French UI strings, centralized so wording stays consistent and a future
- * i18n library can replace this module without touching components.
- */
+/** Centralized so an i18n library can replace this module without touching components. */
 export const MESSAGES = {
   app: {
     name: 'Messagerie leboncoin',
